@@ -14,26 +14,27 @@ namespace NeuroTrainer
 {
     public partial class DrawForm : Form
     {
-        StandartMethods standart = new StandartMethods();
+        StandardMethods standard;
         public DrawForm()
         {
             InitializeComponent();
+            standard = new StandardMethods(this);
         }
 
         private void closing_Image_Click(object sender, EventArgs e)
         {
-            standart.closing();
+            standard.closing();
             Application.Exit();
         }
 
         private void completeSize_Image_Click(object sender, EventArgs e)
         {
-            standart.CompleteSize();
+            standard.completeSize();
         }
 
         private void RollUp_Image_Click(object sender, EventArgs e)
         {
-            standart.rollUp();
+            standard.rollUp();
         }
     }
 }

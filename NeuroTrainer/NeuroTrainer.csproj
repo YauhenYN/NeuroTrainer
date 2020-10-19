@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\Figures.cs" />
     <Compile Include="Classes\Settings.cs" />
-    <Compile Include="Classes\StandartMethods.cs" />
+    <Compile Include="Classes\StandardMethods.cs" />
     <Compile Include="DrawForm.cs">
       <SubType>Form</SubType>
     </Compile>
