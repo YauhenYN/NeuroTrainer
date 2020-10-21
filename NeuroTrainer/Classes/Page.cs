@@ -9,5 +9,6 @@ namespace NeuroTrainer.Classes
     class Page
     {
         private List<Figures.Element> elements;
+        private File.Settings settings;
     }
 }
