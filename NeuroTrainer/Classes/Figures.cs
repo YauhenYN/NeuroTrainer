@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,45 +8,72 @@ namespace NeuroTrainer.Classes
 {
     public static class Figures
     {
-        public static string color;
-        public static int width_Figure;
+        private static List<Element> elements = new List<Element>();
+        public static List<Element> GetElements { get { return elements; } }
+        public abstract class Element
+        {
+            public Element()
+            {
+                elements.Add(this);
+            }
+            protected int x;
+            protected int y;
+            protected String type;
+            protected Element element;
 
-        public static int heigh_Form;
-        public static int width_Form;
-
-        public class Circle
+            public int GetX { get { return x; } }
+            public int GetY { get { return y; } }
+            public String GetTypeOfElement { get { return type; } }
+            public Element GetElement { get { return element; } }
+        }
+        public class Circle : Element
         {
             public Circle(int x, int y)
             {
-
+                this.x = x;
+                this.y = y;
+                type = "Circle";
+                element = this;
             }
         }
-        public class DirectLine
+        public class DirectLine : Element
         {
             public DirectLine(int x, int y)
             {
-
+                this.x = x;
+                this.y = y;
+                type = "DirectLine";
+                element = this;
             }
         }
-        public class Line
+        public class Line : Element
         {
             public Line(int x, int y)
             {
-
+                this.x = x;
+                this.y = y;
+                type = "Line";
+                element = this;
             }
         }
-        public class Rectangle
+        public class Rectangle : Element
         {
             public Rectangle(int x, int y)
             {
-
+                this.x = x;
+                this.y = y;
+                type = "Rectangle";
+                element = this;
             }
         }
-        public class Ellipse
+        public class Ellipse : Element
         {
             public Ellipse(int x, int y)
             {
-
+                this.x = x;
+                this.y = y;
+                type = "Ellipse";
+                element = this;
             }
         }
     }

@@ -36,5 +36,50 @@ namespace NeuroTrainer
         {
             standard.rollUp();
         }
+
+        private void uploadToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void directLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void circleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

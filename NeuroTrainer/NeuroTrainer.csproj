@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Elements.cs" />
     <Compile Include="Classes\Figures.cs" />
+    <Compile Include="Classes\Page.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\StandardMethods.cs" />
     <Compile Include="DrawForm.cs">
