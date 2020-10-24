@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace NeuroTrainer
 {
-    class NeuroTrainer
+    class NeuroTrainerMain
     {
         [STAThread]
         static void Main()

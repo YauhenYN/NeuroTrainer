@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.programName_Label = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.header = new System.Windows.Forms.Panel();
             this.RollUp_Image = new System.Windows.Forms.PictureBox();
             this.completeSize_Image = new System.Windows.Forms.PictureBox();
             this.closing_Image = new System.Windows.Forms.PictureBox();
@@ -40,6 +40,7 @@
             this.uploadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,12 +50,25 @@
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.panel1.SuspendLayout();
+            this.edge1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.edge2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.drawing_Form = new NeuroTrainer.Drawing_Form();
+            this.edge3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.edge4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.header.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RollUp_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.completeSize_Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.closing_Image)).BeginInit();
             this.panel2.SuspendLayout();
             this.TopMenu.SuspendLayout();
+            this.edge1.SuspendLayout();
+            this.edge2.SuspendLayout();
+            this.edge3.SuspendLayout();
+            this.edge4.SuspendLayout();
             this.SuspendLayout();
             // 
             // programName_Label
@@ -67,18 +81,20 @@
             this.programName_Label.TabIndex = 0;
             this.programName_Label.Text = "NeuroTrainer";
             // 
-            // panel1
+            // header
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.RollUp_Image);
-            this.panel1.Controls.Add(this.completeSize_Image);
-            this.panel1.Controls.Add(this.closing_Image);
-            this.panel1.Controls.Add(this.programName_Label);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 22);
-            this.panel1.TabIndex = 1;
+            this.header.AutoScroll = true;
+            this.header.Controls.Add(this.edge4);
+            this.header.Controls.Add(this.RollUp_Image);
+            this.header.Controls.Add(this.completeSize_Image);
+            this.header.Controls.Add(this.closing_Image);
+            this.header.Controls.Add(this.programName_Label);
+            this.header.Dock = System.Windows.Forms.DockStyle.Top;
+            this.header.Location = new System.Drawing.Point(0, 0);
+            this.header.Name = "header";
+            this.header.Size = new System.Drawing.Size(800, 22);
+            this.header.TabIndex = 1;
+            this.header.MouseDown += new System.Windows.Forms.MouseEventHandler(this.header_MouseDown);
             // 
             // RollUp_Image
             // 
@@ -121,7 +137,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.drawing_Form);
             this.panel2.Controls.Add(this.TopMenu);
+            this.panel2.Controls.Add(this.edge1);
+            this.panel2.Controls.Add(this.edge2);
+            this.panel2.Controls.Add(this.edge3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 22);
             this.panel2.Name = "panel2";
@@ -130,13 +150,14 @@
             // 
             // TopMenu
             // 
+            this.TopMenu.BackColor = System.Drawing.SystemColors.Control;
             this.TopMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.drawToolStripMenuItem,
             this.addToolStripMenuItem});
-            this.TopMenu.Location = new System.Drawing.Point(0, 0);
+            this.TopMenu.Location = new System.Drawing.Point(10, 0);
             this.TopMenu.Name = "TopMenu";
-            this.TopMenu.Size = new System.Drawing.Size(800, 24);
+            this.TopMenu.Size = new System.Drawing.Size(780, 24);
             this.TopMenu.TabIndex = 0;
             this.TopMenu.Text = "menuStrip1";
             // 
@@ -145,7 +166,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uploadToolStripMenuItem1,
             this.saveToolStripMenuItem1,
-            this.saveAsToolStripMenuItem1});
+            this.saveAsToolStripMenuItem1,
+            this.createToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -170,6 +192,13 @@
             this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem1.Text = "Save as";
             this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click_1);
+            // 
+            // createToolStripMenuItem
+            // 
+            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.createToolStripMenuItem.Text = "Create";
+            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // drawToolStripMenuItem
             // 
@@ -229,7 +258,7 @@
             // imageToolStripMenuItem
             // 
             this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imageToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.imageToolStripMenuItem.Text = "Image";
             this.imageToolStripMenuItem.Click += new System.EventHandler(this.imageToolStripMenuItem_Click);
             // 
@@ -238,19 +267,99 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // edge1
+            // 
+            this.edge1.Controls.Add(this.panel1);
+            this.edge1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.edge1.Location = new System.Drawing.Point(0, 0);
+            this.edge1.Name = "edge1";
+            this.edge1.Size = new System.Drawing.Size(10, 418);
+            this.edge1.TabIndex = 2;
+            this.edge1.MouseHover += new System.EventHandler(this.onEdge);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(790, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(10, 428);
+            this.panel1.TabIndex = 3;
+            // 
+            // edge2
+            // 
+            this.edge2.Controls.Add(this.panel4);
+            this.edge2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.edge2.Location = new System.Drawing.Point(790, 0);
+            this.edge2.Name = "edge2";
+            this.edge2.Size = new System.Drawing.Size(10, 418);
+            this.edge2.TabIndex = 3;
+            this.edge2.MouseHover += new System.EventHandler(this.onEdge);
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(790, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 428);
+            this.panel4.TabIndex = 3;
+            // 
+            // drawing_Form
+            // 
+            this.drawing_Form.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.drawing_Form.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.drawing_Form.Location = new System.Drawing.Point(0, 24);
+            this.drawing_Form.Margin = new System.Windows.Forms.Padding(0);
+            this.drawing_Form.Name = "drawing_Form";
+            this.drawing_Form.Size = new System.Drawing.Size(0, 0);
+            this.drawing_Form.TabIndex = 1;
+            // 
+            // edge3
+            // 
+            this.edge3.Controls.Add(this.panel5);
+            this.edge3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.edge3.Location = new System.Drawing.Point(0, 418);
+            this.edge3.Name = "edge3";
+            this.edge3.Size = new System.Drawing.Size(800, 10);
+            this.edge3.TabIndex = 6;
+            this.edge3.MouseHover += new System.EventHandler(this.onEdge);
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(790, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(10, 428);
+            this.panel5.TabIndex = 3;
+            // 
+            // edge4
+            // 
+            this.edge4.Controls.Add(this.panel6);
+            this.edge4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.edge4.Location = new System.Drawing.Point(69, 0);
+            this.edge4.Margin = new System.Windows.Forms.Padding(0);
+            this.edge4.Name = "edge4";
+            this.edge4.Size = new System.Drawing.Size(650, 10);
+            this.edge4.TabIndex = 7;
+            this.edge4.MouseHover += new System.EventHandler(this.onEdge);
+            // 
+            // panel6
+            // 
+            this.panel6.Location = new System.Drawing.Point(790, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(10, 428);
+            this.panel6.TabIndex = 3;
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.header);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.TopMenu;
             this.Name = "DrawForm";
             this.Text = "DrawForm";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.header.ResumeLayout(false);
+            this.header.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RollUp_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.completeSize_Image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.closing_Image)).EndInit();
@@ -258,6 +367,10 @@
             this.panel2.PerformLayout();
             this.TopMenu.ResumeLayout(false);
             this.TopMenu.PerformLayout();
+            this.edge1.ResumeLayout(false);
+            this.edge2.ResumeLayout(false);
+            this.edge3.ResumeLayout(false);
+            this.edge4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -265,7 +378,7 @@
         #endregion
 
         private System.Windows.Forms.Label programName_Label;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel header;
         private System.Windows.Forms.PictureBox closing_Image;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.MenuStrip TopMenu;
@@ -284,5 +397,15 @@
         private System.Windows.Forms.ToolStripMenuItem ellipseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createToolStripMenuItem;
+        private Drawing_Form drawing_Form;
+        private System.Windows.Forms.Panel edge1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel edge2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel edge3;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel edge4;
+        private System.Windows.Forms.Panel panel6;
     }
 }

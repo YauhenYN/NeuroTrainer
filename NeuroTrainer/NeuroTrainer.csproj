@@ -57,7 +57,10 @@
     <Compile Include="DrawForm.Designer.cs">
       <DependentUpon>DrawForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NeuroTrainer.cs" />
+    <Compile Include="Elements\Drawing_Form.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NeuroTrainerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DrawForm.resx">
       <DependentUpon>DrawForm.cs</DependentUpon>
@@ -94,5 +97,6 @@
   <ItemGroup>
     <None Include="Resources\RollUp.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

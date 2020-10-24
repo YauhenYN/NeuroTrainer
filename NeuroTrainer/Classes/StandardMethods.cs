@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,9 +36,20 @@ namespace NeuroTrainer.Classes
             RollUp_Event?.Invoke();
             form.WindowState = FormWindowState.Minimized;
         }
+        [DllImport("user32", CharSet = CharSet.Auto)]
+        private extern static bool PostMessage(IntPtr hWnd, uint Msg, uint WParam, uint LParam);
+        [DllImport("user32", CharSet = CharSet.Auto)]
+        private extern static bool ReleaseCapture();
         public void dragging()
         {
             Dragging_Event?.Invoke();
+            ReleaseCapture();
+            PostMessage(form.Handle, 0x0112, 0xF012, 0);
+        }
+        public void getCurrentPositionOfCursor(ref int x, ref int y)
+        {
+            x = Cursor.Position.X;
+            y = Cursor.Position.Y;
         }
     }
 }
