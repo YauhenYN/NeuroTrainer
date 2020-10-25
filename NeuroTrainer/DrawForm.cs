@@ -17,6 +17,7 @@ namespace NeuroTrainer
     {
         StandardMethods standard;
         Page page;
+        Figures.Element element;
         public DrawForm()
         {
             InitializeComponent();
@@ -56,32 +57,57 @@ namespace NeuroTrainer
         int x, y;
         private void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
-            Figures.Line line = new Figures.Line(page, File.Settings.color, x, y);
+            if (page != null)
+            {
+                standard.getCurrentPositionOfCursor(ref x, ref y);
+                Figures.Line line = new Figures.Line(page, File.Settings.color, x, y);
+                element = line;
+            }
+            else standard.MessagePageIsNull();
         }
 
         private void directLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
-            Figures.DirectLine directLine = new Figures.DirectLine(page, File.Settings.color, x, y);
+            if (page != null)
+            {
+                standard.getCurrentPositionOfCursor(ref x, ref y);
+                Figures.DirectLine directLine = new Figures.DirectLine(page, File.Settings.color);
+                element = directLine;
+            }
+            else standard.MessagePageIsNull();
         }
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
-            Figures.Circle circle = new Figures.Circle(page, File.Settings.color, x, y);
+            if (page != null)
+            {
+                standard.getCurrentPositionOfCursor(ref x, ref y);
+                Figures.Circle circle = new Figures.Circle(page, File.Settings.color);
+                element = circle;
+            }
+            else standard.MessagePageIsNull();
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
-            Figures.Rectangle rectangle = new Figures.Rectangle(page, File.Settings.color, x, y);
+            if (page != null)
+            {
+                standard.getCurrentPositionOfCursor(ref x, ref y);
+                Figures.Rectangle rectangle = new Figures.Rectangle(page, File.Settings.color);
+                element = rectangle;
+            }
+            else standard.MessagePageIsNull();
         }
 
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
-            Figures.Ellipse ellipse = new Figures.Ellipse(page, File.Settings.color, x, y);
+            if (page != null)
+            {
+                standard.getCurrentPositionOfCursor(ref x, ref y);
+                Figures.Ellipse ellipse = new Figures.Ellipse(page, File.Settings.color);
+                element = ellipse;
+            }
+            else standard.MessagePageIsNull();
         }
 
         private void header_MouseDown(object sender, MouseEventArgs e)
@@ -91,12 +117,80 @@ namespace NeuroTrainer
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            page = new Page(drawing_Form);
+            page = new Page(drawing_Form2);
         }
 
         private void onEdge(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.SizeWE; //NoMove
+            if (this.WindowState != FormWindowState.Maximized) this.Cursor = Cursors.SizeWE;
+        }
+
+        private void onEdgeVert(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Maximized) this.Cursor = Cursors.SizeNS;
+        }
+
+        private void leaveEdge(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+        bool isMouseDown = false;
+        private void edge_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDown = true;
+            standard.getCurrentPositionOfCursor(ref x, ref y);
+        }
+
+        private void edge_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+        }
+        int x1, y1;
+        private void edge1_MouseMove(object sender, MouseEventArgs e)
+        {
+            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            if ((isMouseDown && this.Width > this.MinimumSize.Width) || ( isMouseDown && this.Width == this.MinimumSize.Width && this.Location.X >= x1))
+            {
+                this.Width -= x1 - x;
+                if(this.Width != this.MinimumSize.Width) this.Location = new Point(this.Location.X + (x1 - x), this.Location.Y);
+            }
+            x = x1;
+        }
+
+        private void edge4_MouseMove(object sender, MouseEventArgs e)
+        {
+            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            if ((isMouseDown && this.Height > this.MinimumSize.Height) || (this.Height == this.MinimumSize.Height && this.Location.Y >= y1))
+            {
+                this.Height -= y1 - y;
+                if (this.Height != this.MinimumSize.Height) this.Location = new Point(this.Location.X, this.Location.Y + (y1 - y));
+            }
+            y = y1;
+        }
+
+        private void edge2_MouseMove(object sender, MouseEventArgs e)
+        {
+            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            if ((isMouseDown && this.Width > this.MinimumSize.Width) || (this.Width == this.MinimumSize.Width && (this.Location.X + this.Width) <= x1))
+            {
+                this.Width += x1 - x;
+            }
+            x = x1;
+        }
+
+        private void clickDrawing(object sender, EventArgs e)
+        {
+            element?.SetFirstPoint(Cursor.Position.X, Cursor.Position.Y);
+        }
+
+        private void edge3_MouseMove(object sender, MouseEventArgs e)
+        {
+            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            if ((isMouseDown && this.Height > this.MinimumSize.Height) || (this.Height == this.MinimumSize.Height && (this.Location.Y + this.Height) <= y1))
+            {
+                this.Height += y1 - y;
+            }
+            y = y1;
         }
 
         private void imageToolStripMenuItem_Click(object sender, EventArgs e)

@@ -51,5 +51,9 @@ namespace NeuroTrainer.Classes
             x = Cursor.Position.X;
             y = Cursor.Position.Y;
         }
+        public void MessagePageIsNull()
+        {
+            MessageBox.Show("Please, Create or add a page before adding figures.", "Page is not defined!");
+        }
     }
 }

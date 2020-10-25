@@ -60,6 +60,7 @@
     <Compile Include="Elements\Drawing_Form.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Exceptions\PageIsNullException.cs" />
     <Compile Include="NeuroTrainerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DrawForm.resx">

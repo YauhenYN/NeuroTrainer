@@ -12,12 +12,14 @@ namespace NeuroTrainer.Classes
         private List<Figures.Element> elements;
         private File.Settings settings;
         public List<Figures.Element> GetElements { get { return elements; } }
+        public Drawing_Form form { get; set; }
         public void addElement(Figures.Element element)
         {
             elements.Add(element);
         }
         public Page(Drawing_Form form)
         {
+            this.form = form;
             settings = new File.Settings(form);
             elements = new List<Figures.Element>();
         }
