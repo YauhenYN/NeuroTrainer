@@ -30,20 +30,29 @@ namespace NeuroTrainer.Classes
                 this.color = color;
                 graphics = parent.form.CreateGraphics();
             }
+            protected void dispose()
+            {
+                graphics.Clear(parent.form.BackColor);
+                graphics = parent.form.CreateGraphics();
+                parent.drawAll();
+            }
             public void SetFirstPoint(int x, int y)
             {
                 this.x = x;
                 this.y = y;
             }
-            public virtual void Draw(int x1, int x2)
+            public virtual void Draw(int x1, int y1)
             {
                 this.x1 = x1;
-                this.x2 = x2;
+                this.y1 = y1;
+            }
+            public virtual void Draw()
+            {
             }
             protected int x;
             protected int y;
             protected int x1;
-            protected int x2;
+            protected int y1;
             protected String type;
             protected Color color;
             public int GetX { get { return x; } }
@@ -60,17 +69,18 @@ namespace NeuroTrainer.Classes
         {
             public DirectLine(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "DirectLine";
             public DirectLine(Page parent, Color color) : base(parent, color) => type = "DirectLine";
-            public override void Draw(int x1, int x2)
+            public override void Draw(int x1, int y1)
             {
-                graphics.Clear(parent.form.BackColor);
-                base.Draw(x1, x2);
+                base.Draw(x1, y1);
+                dispose();
                 Pen pen = new Pen(color);
-                Point p1 = new Point(x, y);
-                Point p2 = new Point(x1, x2);
-                Page page = new Page(parent.form);
-                Line line = new Line(page, pen, p1, p2);
-                graphics.DrawLine(pen, p1, p2);
-                //Как удалить нарисованнный объект
+                graphics.DrawLine(pen, x, y, x1, y1);
+            }
+            public override void Draw()
+            {
+                base.Draw();
+                Pen pen = new Pen(color);
+                graphics.DrawLine(pen, x, y, x1, y1);
             }
         }
         public class Line : Element  //Будет создавать много элементов DirectLine

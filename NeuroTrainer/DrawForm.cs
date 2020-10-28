@@ -178,24 +178,26 @@ namespace NeuroTrainer
             x = x1;
         }
 
-        private void clickDrawing(object sender, EventArgs e)
-        {
-            element?.SetFirstPoint(Cursor.Position.X - Location.X - drawing_Form1.Location.X, Cursor.Position.Y - Location.Y - drawing_Form1.Location.Y);
-        }
-
         private void MoveDrawing(object sender, MouseEventArgs e)
         {
-            if(isDraw) element?.Draw(Cursor.Position.X - Location.X - drawing_Form1.Location.X, Cursor.Position.Y - Location.Y - drawing_Form1.Location.Y);
+            if(isDraw) element?.Draw(e.X, e.Y);
         }
         bool isDraw = false;
         private void draw_MouseDown(object sender, MouseEventArgs e)
         {
+            element?.SetFirstPoint(e.X, e.Y);
             isDraw = true;
         }
         private void draw_MouseUp(object sender, MouseEventArgs e)
         {
             isDraw = false;
         }
+
+        //Colors
+        private void yellowToolStripMenuItem_Click(object sender, EventArgs e) => File.Settings.color = Color.Yellow;
+        private void blackToolStripMenuItem_Click(object sender, EventArgs e) => File.Settings.color = Color.Black;
+        private void redToolStripMenuItem_Click(object sender, EventArgs e) => File.Settings.color = Color.Red;
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e) => File.Settings.color = Color.Blue;
 
         private void edge3_MouseMove(object sender, MouseEventArgs e)
         {

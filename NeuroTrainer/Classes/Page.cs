@@ -17,6 +17,10 @@ namespace NeuroTrainer.Classes
         {
             elements.Add(element);
         }
+        public void drawAll()
+        {
+            foreach(Figures.Element element in elements) element.Draw();
+        }
         public Page(Drawing_Form form)
         {
             this.form = form;
