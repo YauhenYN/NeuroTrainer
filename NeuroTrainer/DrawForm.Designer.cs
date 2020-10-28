@@ -39,7 +39,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.edge3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.drawing_Form2 = new NeuroTrainer.Drawing_Form();
             this.TopMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uploadToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@
             this.edge2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.drawing_Form1 = new NeuroTrainer.Drawing_Form();
             this.header.SuspendLayout();
             this.edge4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RollUp_Image)).BeginInit();
@@ -160,7 +160,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.edge3);
-            this.panel2.Controls.Add(this.drawing_Form2);
+            this.panel2.Controls.Add(this.drawing_Form1);
             this.panel2.Controls.Add(this.TopMenu);
             this.panel2.Controls.Add(this.edge1);
             this.panel2.Controls.Add(this.edge2);
@@ -191,17 +191,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(10, 428);
             this.panel5.TabIndex = 3;
-            // 
-            // drawing_Form2
-            // 
-            this.drawing_Form2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.drawing_Form2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.drawing_Form2.Location = new System.Drawing.Point(5, 24);
-            this.drawing_Form2.Margin = new System.Windows.Forms.Padding(0);
-            this.drawing_Form2.Name = "drawing_Form2";
-            this.drawing_Form2.Size = new System.Drawing.Size(0, 0);
-            this.drawing_Form2.TabIndex = 1;
-            this.drawing_Form2.Click += new System.EventHandler(this.clickDrawing);
             // 
             // TopMenu
             // 
@@ -366,6 +355,20 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // drawing_Form1
+            // 
+            this.drawing_Form1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.drawing_Form1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.drawing_Form1.Location = new System.Drawing.Point(5, 24);
+            this.drawing_Form1.Margin = new System.Windows.Forms.Padding(0);
+            this.drawing_Form1.Name = "drawing_Form1";
+            this.drawing_Form1.Size = new System.Drawing.Size(0, 0);
+            this.drawing_Form1.TabIndex = 1;
+            this.drawing_Form1.Click += new System.EventHandler(this.clickDrawing);
+            this.drawing_Form1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.draw_MouseDown);
+            this.drawing_Form1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDrawing);
+            this.drawing_Form1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.draw_MouseUp);
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,6 +430,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel edge4;
         private System.Windows.Forms.Panel panel6;
-        private Drawing_Form drawing_Form2;
+        private Drawing_Form drawing_Form1;
     }
 }

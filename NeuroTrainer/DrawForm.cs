@@ -117,7 +117,7 @@ namespace NeuroTrainer
 
         private void createToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            page = new Page(drawing_Form2);
+            page = new Page(drawing_Form1);
         }
 
         private void onEdge(object sender, EventArgs e)
@@ -180,7 +180,21 @@ namespace NeuroTrainer
 
         private void clickDrawing(object sender, EventArgs e)
         {
-            element?.SetFirstPoint(Cursor.Position.X, Cursor.Position.Y);
+            element?.SetFirstPoint(Cursor.Position.X - Location.X - drawing_Form1.Location.X, Cursor.Position.Y - Location.Y - drawing_Form1.Location.Y);
+        }
+
+        private void MoveDrawing(object sender, MouseEventArgs e)
+        {
+            if(isDraw) element?.Draw(Cursor.Position.X - Location.X - drawing_Form1.Location.X, Cursor.Position.Y - Location.Y - drawing_Form1.Location.Y);
+        }
+        bool isDraw = false;
+        private void draw_MouseDown(object sender, MouseEventArgs e)
+        {
+            isDraw = true;
+        }
+        private void draw_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDraw = false;
         }
 
         private void edge3_MouseMove(object sender, MouseEventArgs e)

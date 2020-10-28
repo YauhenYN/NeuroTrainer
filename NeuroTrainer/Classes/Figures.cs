@@ -16,7 +16,7 @@ namespace NeuroTrainer.Classes
         public abstract class Element
         {
             protected Graphics graphics;
-            Page parent;
+            protected Page parent;
             public Element(Page parent, Color color, int x, int y) :this (parent, color)
             {
                 this.x = x;
@@ -35,11 +35,15 @@ namespace NeuroTrainer.Classes
                 this.x = x;
                 this.y = y;
             }
-            public virtual void Draw()
+            public virtual void Draw(int x1, int x2)
             {
+                this.x1 = x1;
+                this.x2 = x2;
             }
             protected int x;
             protected int y;
+            protected int x1;
+            protected int x2;
             protected String type;
             protected Color color;
             public int GetX { get { return x; } }
@@ -56,14 +60,17 @@ namespace NeuroTrainer.Classes
         {
             public DirectLine(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "DirectLine";
             public DirectLine(Page parent, Color color) : base(parent, color) => type = "DirectLine";
-            public override void Draw()
+            public override void Draw(int x1, int x2)
             {
-                base.Draw();
-                MessageBox.Show("gsdffd", "dfgsfs");
-                Pen pen = new Pen(Color.Red);
+                graphics.Clear(parent.form.BackColor);
+                base.Draw(x1, x2);
+                Pen pen = new Pen(color);
                 Point p1 = new Point(x, y);
-                Point p2 = new Point(30, 50);
+                Point p2 = new Point(x1, x2);
+                Page page = new Page(parent.form);
+                Line line = new Line(page, pen, p1, p2);
                 graphics.DrawLine(pen, p1, p2);
+                //Как удалить нарисованнный объект
             }
         }
         public class Line : Element  //Будет создавать много элементов DirectLine
