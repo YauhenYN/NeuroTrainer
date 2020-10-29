@@ -21,6 +21,10 @@ namespace NeuroTrainer.Classes
         {
             foreach(Figures.Element element in elements) element.Draw();
         }
+        public void drawAll(int isLast)
+        {
+            for(int step = 0; step < elements.Count-1; step++) elements[step].Draw();
+        }
         public Page(Drawing_Form form)
         {
             this.form = form;
