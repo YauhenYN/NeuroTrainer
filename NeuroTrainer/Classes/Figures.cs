@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Xml.Serialization;
 namespace NeuroTrainer.Classes
 {
     public static class Figures
-    {   //ОТРИСОВЫВАТЬ ТОЛЬКО ОДИН РАЗ А НЕ ПЕРЕД КАРЖЫМ РИСОВАНИЕМ
+    {   
         public abstract class Element
         {
             protected Graphics graphics;
@@ -20,21 +21,22 @@ namespace NeuroTrainer.Classes
             public Element(Page parent, Color color, int x, int y) :this (parent, color) => SetFirstPoint(x, y);
             public Element(Page parent, Color color)
             {
-                values = new List<int>() {0, 0, 0, 0 };
                 if (parent == null) throw new PageIsNullException();
                 this.parent = parent;
                 parent.addElement(this);
                 this.color = color;
                 graphics = parent.form.CreateGraphics();
             }
+            protected void newList() => values = new List<int>() { 0, 0, 0, 0 };
             protected void dispose()
             {
                 graphics.Clear(parent.form.BackColor);
                 graphics = parent.form.CreateGraphics();
-                parent.drawAll(-1);
+                parent.drawAll(true);
             }
-            public void SetFirstPoint(int x, int y)
+            public virtual void SetFirstPoint(int x, int y)
             {
+                newList();
                 values[0] = x;
                 values[1] = y;
             }
@@ -45,6 +47,9 @@ namespace NeuroTrainer.Classes
                 Draw();
             }
             public virtual void Draw()
+            {
+            }
+            public virtual void ifMouseDown()
             {
             }
             protected List<int> values;
@@ -63,7 +68,6 @@ namespace NeuroTrainer.Classes
             {
                 dispose();
                 base.Draw(x1, y1);
-                Draw();
             }
             public override void Draw()
             {
@@ -92,19 +96,22 @@ namespace NeuroTrainer.Classes
         {
             public Line(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "Line";
             public Line(Page parent, Color color) : base(parent, color) => type = "Line";
-            public override void Draw(int x1, int y1)
+            public override void Draw(int x, int y)
             {
-                dispose();
-                values.Add(x1);
-                values.Add(y1);
+                values.Add(x);
+                values.Add(y);
                 Draw();
+            }
+            public override void SetFirstPoint(int x, int y)
+            {
+                values = new List<int>() { x, y };
+                dispose();
             }
             public override void Draw()
             {
                 base.Draw();
                 Pen pen = new Pen(color);
-                for (int step = 0; step < values.Count-2; step += 2)
-                    graphics.DrawLine(pen, values[step], values[step + 1], values[step + 2], values[step + 3]);
+                for (int step = 0; step < values.Count - 2; step += 2) graphics.DrawLine(pen, values[step], values[step + 1], values[step + 2], values[step + 3]);
             }
 
         }

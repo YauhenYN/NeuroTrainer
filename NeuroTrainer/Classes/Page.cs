@@ -21,7 +21,7 @@ namespace NeuroTrainer.Classes
         {
             foreach(Figures.Element element in elements) element.Draw();
         }
-        public void drawAll(int isLast)
+        public void drawAll(bool isLast)
         {
             for(int step = 0; step < elements.Count-1; step++) elements[step].Draw();
         }

@@ -42,17 +42,17 @@ namespace NeuroTrainer
 
         private void uploadToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            File.Load();
+            page = File.upload();
         }
 
         private void saveToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-
+            File.save(page);
         }
 
         private void saveAsToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-
+            File.saveAs(page);
         }
         int x, y;
         private void lineToolStripMenuItem_Click(object sender, EventArgs e)
