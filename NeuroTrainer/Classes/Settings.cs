@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.Json;
+using System.Threading;
 
 namespace NeuroTrainer.Classes
 {
@@ -23,34 +24,68 @@ namespace NeuroTrainer.Classes
                 Heigh_Page = 500;
                 Width_Page = 500;
             }
-            public int Heigh_Page { get { return heigh_Page; } set { if (heigh_Page + value > 299 && heigh_Page + value < 3001) heigh_Page += value; form.Height = heigh_Page; } }
-            public int Width_Page { get { return width_Page; } set { if (width_Page + value > 299 && width_Page + value < 3001) width_Page += value; form.Width = Width_Page; } }
+            //ПРОВЕРИТЬ ПОЧЕМУ ЕЙ ВСЁРАВНО КАКАЯ ВЫСОТА И ШИРИНА
+            public int Heigh_Page { get { return heigh_Page; } set { if ((heigh_Page + value > 299 && heigh_Page + value < 3001) || value == 0) heigh_Page = value; form.Height = heigh_Page; } }
+            public int Width_Page { get { return width_Page; } set { if ((width_Page + value > 299 && width_Page + value < 3001) || value == 0) width_Page = value; form.Width = Width_Page; } }
+            ~Settings()
+            {
+                Heigh_Page = 0;
+                Width_Page = 0;
+            }
         }
-        private static Page Load(String path)
+        private static Page load(Drawing_Form form, String path)
         {
             TextReader tr = new StreamReader(path);
             String str = tr.ReadLine();
-            Page page = JsonSerializer.Deserialize<Page>(str);
-            return page;
+            Integrate integrated = JsonSerializer.Deserialize<Integrate>(str);
+            return new Page(form, integrated);
         }
-        private static void Write(Page page, String path)
+        private static void write(Integrate integrated, String path)
         {
-            string wPage = JsonSerializer.Serialize<Page>(page);
-            FileStream fileStream = new FileStream(path, FileMode.Create);
-            StreamWriter output = new StreamWriter(fileStream);
-            output.Write(wPage);
+            string wPage = JsonSerializer.Serialize<Integrate>(integrated);
+            System.IO.File.WriteAllText(path, wPage);
         }
+        static FileDialog fileDialog;
+        static string path;
         public static void save(Page page)
         {
-
+            if (page != null)
+                if (path != null) write(page.OutIntegrate(), path);
+                else StandardMethods.pathIsNull();
+            else StandardMethods.messagePageIsNull();
         }
         public static void saveAs(Page page)
         {
-
+            if (page != null)
+            {
+                fileDialog = new SaveFileDialog();
+                fileDialog.DefaultExt = "nt";
+                fileDialog.ShowDialog();
+                if (fileDialog.FileName != "") write(page.OutIntegrate(), fileDialog.FileName);
+            }
         }
-        public static Page upload()
+        public static Page upload(Drawing_Form form)
         {
-            return new Page(new Drawing_Form());
+            fileDialog = new OpenFileDialog();
+            fileDialog.DefaultExt = "nt";
+            fileDialog.ShowDialog();
+            if (fileDialog.FileName != "") { path = fileDialog.FileName; return load(form, fileDialog.FileName); }
+            else return null;
+        }
+        public class Integrate
+        {
+            public int heigh_Drawing_Form { get; set; }
+            public int width_Drawing_Form { get; set; }
+            public List<List<int>> values { get; set; }
+            //ИЗМЕНИТЬ ЦВЕТ НА ТЕКСТ
+            public List<Color> colors { get; set; }
+            public List<String> types { get; set; }
+            public Integrate()
+            {
+                values = new List<List<int>>();
+                colors = new List<Color>();
+                types = new List<string>();
+            }
         }
     }
 }

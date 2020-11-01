@@ -18,7 +18,7 @@ namespace NeuroTrainer.Classes
         {
             protected Graphics graphics;
             protected Page parent;
-            public Element(Page parent, Color color, int x, int y) :this (parent, color) => SetFirstPoint(x, y);
+            public Element(Page parent, Color color, int x, int y) :this (parent, color) => setFirstPoint(x, y);
             public Element(Page parent, Color color)
             {
                 if (parent == null) throw new PageIsNullException();
@@ -34,82 +34,79 @@ namespace NeuroTrainer.Classes
                 graphics = parent.form.CreateGraphics();
                 parent.drawAll(true);
             }
-            public virtual void SetFirstPoint(int x, int y)
+            public virtual void setFirstPoint(int x, int y)
             {
                 newList();
                 values[0] = x;
                 values[1] = y;
             }
-            public virtual void Draw(int x1, int y1)
+            public virtual void draw(int x1, int y1)
             {
                 values[2] = x1;
                 values[3] = y1;
-                Draw();
+                draw();
             }
-            public virtual void Draw()
+            public virtual void draw()
             {
             }
             public virtual void ifMouseDown()
             {
             }
             protected List<int> values;
-            protected String type;
             protected Color color;
-            public int GetX { get { return values[0]; } }
-            public int GetY { get { return values[1]; } }
-            public String GetTypeOfElement { get { return type; } }
-            public Color GetColor { get { return color; } }
+            public List<int> List { get { return values; } }
+            public Color Color { get { return color; } }
         }
         public class Circle : Element
         {
-            public Circle(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "Circle";
-            public Circle(Page parent, Color color) : base(parent, color) => type = "Circle";
-            public override void Draw(int x1, int y1)
+            public Circle(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
+            public Circle(Page parent, Color color) : base(parent, color) { }
+            public override void draw(int x1, int y1)
             {
                 dispose();
-                base.Draw(x1, y1);
+                base.draw(x1, y1);
             }
-            public override void Draw()
+            public override void draw()
             {
-                base.Draw();
+                base.draw();
                 Pen pen = new Pen(color);
                 graphics.DrawEllipse(pen, values[0], values[1], values[3], values[3]);
             }
         }
         public class DirectLine : Element
         {
-            public DirectLine(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "DirectLine";
-            public DirectLine(Page parent, Color color) : base(parent, color) => type = "DirectLine";
-            public override void Draw(int x1, int y1)
+            public DirectLine(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
+            public DirectLine(Page parent, Color color) : base(parent, color) { }
+            public override void draw(int x1, int y1)
             {
                 dispose();
-                base.Draw(x1, y1);
+                base.draw(x1, y1);
             }
-            public override void Draw()
+            public override void draw()
             {
-                base.Draw();
+                base.draw();
                 Pen pen = new Pen(color);
                 graphics.DrawLine(pen, values[0], values[1], values[2], values[3]);
             }
         }
         public class Line : Element  //Будет создавать много элементов DirectLine
         {
-            public Line(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "Line";
-            public Line(Page parent, Color color) : base(parent, color) => type = "Line";
-            public override void Draw(int x, int y)
+            public Line(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
+            public Line(Page parent, Color color) : base(parent, color) { }
+            public override void draw(int x, int y)
             {
                 values.Add(x);
                 values.Add(y);
-                Draw();
+                draw();
             }
-            public override void SetFirstPoint(int x, int y)
+            public override void setFirstPoint(int x, int y)
             {
                 values = new List<int>() { x, y };
                 dispose();
             }
-            public override void Draw()
+            public override void draw()
             {
-                base.Draw();
+                base.draw();
                 Pen pen = new Pen(color);
                 for (int step = 0; step < values.Count - 2; step += 2) graphics.DrawLine(pen, values[step], values[step + 1], values[step + 2], values[step + 3]);
             }
@@ -117,32 +114,32 @@ namespace NeuroTrainer.Classes
         }
         public class Rectangle : Element
         {
-            public Rectangle(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "Rectangle";
-            public Rectangle(Page parent, Color color) : base(parent, color) => type = "Rectangle";
-            public override void Draw(int x1, int y1)
+            public Rectangle(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
+            public Rectangle(Page parent, Color color) : base(parent, color) { }
+            public override void draw(int x1, int y1)
             {
                 dispose();
-                base.Draw(x1, y1);
+                base.draw(x1, y1);
             }
-            public override void Draw()
+            public override void draw()
             {
-                base.Draw();
+                base.draw();
                 Pen pen = new Pen(color);
                 graphics.DrawRectangle(pen, values[0], values[1], values[2], values[3]);
             }
         }
         public class Ellipse : Element
         {
-            public Ellipse(Page parent, Color color, int x, int y) : base(parent, color, x, y) => type = "Ellipse";
-            public Ellipse(Page parent, Color color) : base(parent, color) => type = "Ellipse";
-            public override void Draw(int x1, int y1)
+            public Ellipse(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
+            public Ellipse(Page parent, Color color) : base(parent, color) { }
+            public override void draw(int x1, int y1)
             {
                 dispose();
-                base.Draw(x1, y1);
+                base.draw(x1, y1);
             }
-            public override void Draw()
+            public override void draw()
             {
-                base.Draw();
+                base.draw();
                 Pen pen = new Pen(color);
                 graphics.DrawEllipse(pen, values[0], values[1], values[2], values[3]);
             }

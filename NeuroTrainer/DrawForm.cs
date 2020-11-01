@@ -42,7 +42,8 @@ namespace NeuroTrainer
 
         private void uploadToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            page = File.upload();
+            Page tPage = File.upload(drawing_Form1);
+            if(tPage != null) page = tPage;
         }
 
         private void saveToolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -59,55 +60,55 @@ namespace NeuroTrainer
         {
             if (page != null)
             {
-                standard.getCurrentPositionOfCursor(ref x, ref y);
+                StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
                 Figures.Line line = new Figures.Line(page, File.Settings.color, x, y);
                 element = line;
             }
-            else standard.MessagePageIsNull();
+            else StandardMethods.messagePageIsNull();
         }
 
         private void directLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (page != null)
             {
-                standard.getCurrentPositionOfCursor(ref x, ref y);
+                StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
                 Figures.DirectLine directLine = new Figures.DirectLine(page, File.Settings.color);
                 element = directLine;
             }
-            else standard.MessagePageIsNull();
+            else StandardMethods.messagePageIsNull();
         }
 
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (page != null)
             {
-                standard.getCurrentPositionOfCursor(ref x, ref y);
+                StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
                 Figures.Circle circle = new Figures.Circle(page, File.Settings.color);
                 element = circle;
             }
-            else standard.MessagePageIsNull();
+            else StandardMethods.messagePageIsNull();
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (page != null)
             {
-                standard.getCurrentPositionOfCursor(ref x, ref y);
+                StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
                 Figures.Rectangle rectangle = new Figures.Rectangle(page, File.Settings.color);
                 element = rectangle;
             }
-            else standard.MessagePageIsNull();
+            else StandardMethods.messagePageIsNull();
         }
 
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (page != null)
             {
-                standard.getCurrentPositionOfCursor(ref x, ref y);
+                StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
                 Figures.Ellipse ellipse = new Figures.Ellipse(page, File.Settings.color);
                 element = ellipse;
             }
-            else standard.MessagePageIsNull();
+            else StandardMethods.messagePageIsNull();
         }
 
         private void header_MouseDown(object sender, MouseEventArgs e)
@@ -138,7 +139,7 @@ namespace NeuroTrainer
         private void edge_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
-            standard.getCurrentPositionOfCursor(ref x, ref y);
+            StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
         }
 
         private void edge_MouseUp(object sender, MouseEventArgs e)
@@ -148,7 +149,7 @@ namespace NeuroTrainer
         int x1, y1;
         private void edge1_MouseMove(object sender, MouseEventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            StandardMethods.getCurrentPositionOfCursor(ref x1, ref y1);
             if ((isMouseDown && this.Width > this.MinimumSize.Width) || ( isMouseDown && this.Width == this.MinimumSize.Width && this.Location.X >= x1))
             {
                 this.Width -= x1 - x;
@@ -159,7 +160,7 @@ namespace NeuroTrainer
 
         private void edge4_MouseMove(object sender, MouseEventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            StandardMethods.getCurrentPositionOfCursor(ref x1, ref y1);
             if ((isMouseDown && this.Height > this.MinimumSize.Height) || (this.Height == this.MinimumSize.Height && this.Location.Y >= y1))
             {
                 this.Height -= y1 - y;
@@ -170,7 +171,7 @@ namespace NeuroTrainer
 
         private void edge2_MouseMove(object sender, MouseEventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            StandardMethods.getCurrentPositionOfCursor(ref x1, ref y1);
             if ((isMouseDown && this.Width > this.MinimumSize.Width) || (this.Width == this.MinimumSize.Width && (this.Location.X + this.Width) <= x1))
             {
                 this.Width += x1 - x;
@@ -180,12 +181,12 @@ namespace NeuroTrainer
 
         private void MoveDrawing(object sender, MouseEventArgs e)
         {
-            if(isDraw) element?.Draw(e.X, e.Y);
+            if(isDraw) element?.draw(e.X, e.Y);
         }
         bool isDraw = false;
         private void draw_MouseDown(object sender, MouseEventArgs e)
         {
-            element?.SetFirstPoint(e.X, e.Y);
+            element?.setFirstPoint(e.X, e.Y);
             isDraw = true;
         }
         private void draw_MouseUp(object sender, MouseEventArgs e)
@@ -201,7 +202,7 @@ namespace NeuroTrainer
 
         private void edge3_MouseMove(object sender, MouseEventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x1, ref y1);
+            StandardMethods.getCurrentPositionOfCursor(ref x1, ref y1);
             if ((isMouseDown && this.Height > this.MinimumSize.Height) || (this.Height == this.MinimumSize.Height && (this.Location.Y + this.Height) <= y1))
             {
                 this.Height += y1 - y;
@@ -211,7 +212,7 @@ namespace NeuroTrainer
 
         private void imageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            standard.getCurrentPositionOfCursor(ref x, ref y);
+            StandardMethods.getCurrentPositionOfCursor(ref x, ref y);
             Elements.Image image = new Elements.Image();
         }
     }

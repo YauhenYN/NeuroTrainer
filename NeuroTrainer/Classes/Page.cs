@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace NeuroTrainer.Classes
     {
         private List<Figures.Element> elements;
         private File.Settings settings;
-        public List<Figures.Element> GetElements { get { return elements; } }
+        public List<Figures.Element> getFigures { get { return elements; } }
         public Drawing_Form form { get; set; }
         public void addElement(Figures.Element element)
         {
@@ -19,17 +20,63 @@ namespace NeuroTrainer.Classes
         }
         public void drawAll()
         {
-            foreach(Figures.Element element in elements) element.Draw();
+            foreach(Figures.Element element in elements) element.draw();
         }
         public void drawAll(bool isLast)
         {
-            for(int step = 0; step < elements.Count-1; step++) elements[step].Draw();
+            for(int step = 0; step < elements.Count-1; step++) elements[step].draw();
         }
         public Page(Drawing_Form form)
         {
             this.form = form;
             settings = new File.Settings(form);
             elements = new List<Figures.Element>();
+        }
+        public Page(Drawing_Form form, File.Integrate integrated) : this(form)
+        {
+            settings.Heigh_Page = integrated.heigh_Drawing_Form;
+            settings.Width_Page = integrated.width_Drawing_Form;
+            Figures.Element element;
+            for (int step = 0; step < integrated.colors.Count; step++)
+            {
+                switch (integrated.types[step])
+                {
+                    case "Circle":
+                        element = new Figures.Circle(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element.draw(integrated.values[step][2], integrated.values[step][3]);
+                        break;
+                    case "DirectLine":
+                        element = new Figures.DirectLine(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element.draw(integrated.values[step][2], integrated.values[step][3]);
+                        break;
+                    case "Line":
+                        element = new Figures.Line(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        for(int inStep = 2; inStep < integrated.values[step].Count-2; inStep+=2) element.draw(integrated.values[step][inStep], integrated.values[step][inStep+1]);
+                        break;
+                    case "Rectangle":
+                        element = new Figures.Rectangle(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element.draw(integrated.values[step][2], integrated.values[step][3]);
+                        break;
+                    case "Ellipse":
+                        element = new Figures.Ellipse(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element.draw(integrated.values[step][2], integrated.values[step][3]);
+                        break;
+                }
+            }
+            File.Settings.color = Color.Black;
+        }
+        public File.Integrate OutIntegrate()
+        {
+            File.Integrate integrated = new File.Integrate();
+            integrated.heigh_Drawing_Form = settings.Heigh_Page;
+            integrated.width_Drawing_Form = settings.Width_Page;
+            foreach(Figures.Element element in elements)
+            {
+                integrated.colors.Add(element.Color);
+                integrated.types.Add(element.GetType().Name);
+                integrated.values.Add(element.List);
+            }
+            return integrated;
         }
     }
 }

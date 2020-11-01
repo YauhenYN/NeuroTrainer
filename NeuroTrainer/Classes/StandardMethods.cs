@@ -46,14 +46,18 @@ namespace NeuroTrainer.Classes
             ReleaseCapture();
             PostMessage(form.Handle, 0x0112, 0xF012, 0);
         }
-        public void getCurrentPositionOfCursor(ref int x, ref int y)
+        public static void getCurrentPositionOfCursor(ref int x, ref int y)
         {
             x = Cursor.Position.X;
             y = Cursor.Position.Y;
         }
-        public void MessagePageIsNull()
+        public static void messagePageIsNull()
         {
-            MessageBox.Show("Please, Create or add a page before adding figures.", "Page is not defined!");
+            MessageBox.Show("Please, Create or add a page before adding figures or saving project.", "Page is not defined!");
+        }
+        public static void pathIsNull()
+        {
+            MessageBox.Show("File that was created cannot save, it's necessary to save as", "The page was created at this time");
         }
     }
 }
