@@ -24,9 +24,8 @@ namespace NeuroTrainer.Classes
                 Heigh_Page = 500;
                 Width_Page = 500;
             }
-            //ПРОВЕРИТЬ ПОЧЕМУ ЕЙ ВСЁРАВНО КАКАЯ ВЫСОТА И ШИРИНА
-            public int Heigh_Page { get { return heigh_Page; } set { if ((heigh_Page + value > 299 && heigh_Page + value < 3001) || value == 0) heigh_Page = value; form.Height = heigh_Page; } }
-            public int Width_Page { get { return width_Page; } set { if ((width_Page + value > 299 && width_Page + value < 3001) || value == 0) width_Page = value; form.Width = Width_Page; } }
+            public int Heigh_Page { get { return heigh_Page; } set { if ((value > 299 && value < 1820) || value == 0) heigh_Page = value; form.Height = heigh_Page; } }
+            public int Width_Page { get { return width_Page; } set { if ((value > 299 && value < 1080) || value == 0) width_Page = value; form.Width = Width_Page; } }
             ~Settings()
             {
                 Heigh_Page = 0;
@@ -37,6 +36,7 @@ namespace NeuroTrainer.Classes
         {
             TextReader tr = new StreamReader(path);
             String str = tr.ReadLine();
+            tr.Close();
             Integrate integrated = JsonSerializer.Deserialize<Integrate>(str);
             return new Page(form, integrated);
         }
@@ -77,13 +77,12 @@ namespace NeuroTrainer.Classes
             public int heigh_Drawing_Form { get; set; }
             public int width_Drawing_Form { get; set; }
             public List<List<int>> values { get; set; }
-            //ИЗМЕНИТЬ ЦВЕТ НА ТЕКСТ
-            public List<Color> colors { get; set; }
+            public List<int> colors { get; set; }
             public List<String> types { get; set; }
             public Integrate()
             {
                 values = new List<List<int>>();
-                colors = new List<Color>();
+                colors = new List<int>();
                 types = new List<string>();
             }
         }

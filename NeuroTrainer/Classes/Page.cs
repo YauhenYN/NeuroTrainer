@@ -29,6 +29,9 @@ namespace NeuroTrainer.Classes
         public Page(Drawing_Form form)
         {
             this.form = form;
+            Graphics graphics = form.CreateGraphics();
+            graphics.Clear(form.BackColor);
+            graphics.Dispose();
             settings = new File.Settings(form);
             elements = new List<Figures.Element>();
         }
@@ -42,23 +45,23 @@ namespace NeuroTrainer.Classes
                 switch (integrated.types[step])
                 {
                     case "Circle":
-                        element = new Figures.Circle(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element = new Figures.Circle(this, Color.FromArgb(integrated.colors[step]), integrated.values[step][0], integrated.values[step][1]);
                         element.draw(integrated.values[step][2], integrated.values[step][3]);
                         break;
                     case "DirectLine":
-                        element = new Figures.DirectLine(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element = new Figures.DirectLine(this, Color.FromArgb(integrated.colors[step]), integrated.values[step][0], integrated.values[step][1]);
                         element.draw(integrated.values[step][2], integrated.values[step][3]);
                         break;
                     case "Line":
-                        element = new Figures.Line(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element = new Figures.Line(this, Color.FromArgb(integrated.colors[step]), integrated.values[step][0], integrated.values[step][1]);
                         for(int inStep = 2; inStep < integrated.values[step].Count-2; inStep+=2) element.draw(integrated.values[step][inStep], integrated.values[step][inStep+1]);
                         break;
                     case "Rectangle":
-                        element = new Figures.Rectangle(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element = new Figures.Rectangle(this, Color.FromArgb(integrated.colors[step]), integrated.values[step][0], integrated.values[step][1]);
                         element.draw(integrated.values[step][2], integrated.values[step][3]);
                         break;
                     case "Ellipse":
-                        element = new Figures.Ellipse(this, integrated.colors[step], integrated.values[step][0], integrated.values[step][1]);
+                        element = new Figures.Ellipse(this, Color.FromArgb(integrated.colors[step]), integrated.values[step][0], integrated.values[step][1]);
                         element.draw(integrated.values[step][2], integrated.values[step][3]);
                         break;
                 }
@@ -72,7 +75,7 @@ namespace NeuroTrainer.Classes
             integrated.width_Drawing_Form = settings.Width_Page;
             foreach(Figures.Element element in elements)
             {
-                integrated.colors.Add(element.Color);
+                integrated.colors.Add(element.Color.ToArgb());
                 integrated.types.Add(element.GetType().Name);
                 integrated.values.Add(element.List);
             }

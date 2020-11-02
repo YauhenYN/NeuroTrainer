@@ -80,15 +80,18 @@
             // 
             this.programName_Label.AutoSize = true;
             this.programName_Label.Dock = System.Windows.Forms.DockStyle.Left;
+            this.programName_Label.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.programName_Label.Location = new System.Drawing.Point(0, 0);
+            this.programName_Label.Margin = new System.Windows.Forms.Padding(0);
             this.programName_Label.Name = "programName_Label";
-            this.programName_Label.Size = new System.Drawing.Size(69, 13);
+            this.programName_Label.Size = new System.Drawing.Size(91, 18);
             this.programName_Label.TabIndex = 0;
             this.programName_Label.Text = "NeuroTrainer";
             // 
             // header
             // 
             this.header.AutoScroll = true;
+            this.header.BackColor = System.Drawing.SystemColors.Control;
             this.header.Controls.Add(this.edge4);
             this.header.Controls.Add(this.RollUp_Image);
             this.header.Controls.Add(this.completeSize_Image);
@@ -103,12 +106,13 @@
             // 
             // edge4
             // 
+            this.edge4.BackColor = System.Drawing.Color.Transparent;
             this.edge4.Controls.Add(this.panel6);
             this.edge4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.edge4.Location = new System.Drawing.Point(69, 0);
+            this.edge4.Location = new System.Drawing.Point(91, 0);
             this.edge4.Margin = new System.Windows.Forms.Padding(0);
             this.edge4.Name = "edge4";
-            this.edge4.Size = new System.Drawing.Size(650, 5);
+            this.edge4.Size = new System.Drawing.Size(628, 5);
             this.edge4.TabIndex = 7;
             this.edge4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.edge_MouseDown);
             this.edge4.MouseLeave += new System.EventHandler(this.leaveEdge);
@@ -167,8 +171,8 @@
             this.panel2.Controls.Add(this.drawing_Form1);
             this.panel2.Controls.Add(this.edge3);
             this.panel2.Controls.Add(this.TopMenu);
-            this.panel2.Controls.Add(this.edge1);
             this.panel2.Controls.Add(this.edge2);
+            this.panel2.Controls.Add(this.edge1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 22);
             this.panel2.Name = "panel2";
@@ -177,6 +181,7 @@
             // 
             // edge3
             // 
+            this.edge3.BackColor = System.Drawing.Color.Transparent;
             this.edge3.Controls.Add(this.panel5);
             this.edge3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.edge3.Location = new System.Drawing.Point(5, 423);
@@ -355,6 +360,7 @@
             // 
             // edge1
             // 
+            this.edge1.BackColor = System.Drawing.Color.Transparent;
             this.edge1.Controls.Add(this.panel1);
             this.edge1.Dock = System.Windows.Forms.DockStyle.Left;
             this.edge1.Location = new System.Drawing.Point(0, 0);
@@ -377,6 +383,7 @@
             // 
             // edge2
             // 
+            this.edge2.BackColor = System.Drawing.Color.Transparent;
             this.edge2.Controls.Add(this.panel4);
             this.edge2.Dock = System.Windows.Forms.DockStyle.Right;
             this.edge2.Location = new System.Drawing.Point(795, 0);
