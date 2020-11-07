@@ -37,6 +37,7 @@
             this.completeSize_Image = new System.Windows.Forms.PictureBox();
             this.closing_Image = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.drawing_Form1 = new NeuroTrainer.Drawing_Form();
             this.edge3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.TopMenu = new System.Windows.Forms.MenuStrip();
@@ -58,12 +59,11 @@
             this.yellowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edge1 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.edge2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.edge1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.drawing_Form1 = new NeuroTrainer.Drawing_Form();
             this.header.SuspendLayout();
             this.edge4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RollUp_Image)).BeginInit();
@@ -72,8 +72,8 @@
             this.panel2.SuspendLayout();
             this.edge3.SuspendLayout();
             this.TopMenu.SuspendLayout();
-            this.edge1.SuspendLayout();
             this.edge2.SuspendLayout();
+            this.edge1.SuspendLayout();
             this.SuspendLayout();
             // 
             // programName_Label
@@ -178,6 +178,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 428);
             this.panel2.TabIndex = 2;
+            // 
+            // drawing_Form1
+            // 
+            this.drawing_Form1.BackColor = System.Drawing.SystemColors.Control;
+            this.drawing_Form1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.drawing_Form1.Location = new System.Drawing.Point(5, 24);
+            this.drawing_Form1.Margin = new System.Windows.Forms.Padding(0);
+            this.drawing_Form1.Name = "drawing_Form1";
+            this.drawing_Form1.Size = new System.Drawing.Size(0, 0);
+            this.drawing_Form1.TabIndex = 7;
+            this.drawing_Form1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.draw_MouseDown);
+            this.drawing_Form1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDrawing);
+            this.drawing_Form1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.draw_MouseUp);
             // 
             // edge3
             // 
@@ -358,29 +371,6 @@
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
-            // edge1
-            // 
-            this.edge1.BackColor = System.Drawing.Color.Transparent;
-            this.edge1.Controls.Add(this.panel1);
-            this.edge1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.edge1.Location = new System.Drawing.Point(0, 0);
-            this.edge1.Margin = new System.Windows.Forms.Padding(0);
-            this.edge1.Name = "edge1";
-            this.edge1.Size = new System.Drawing.Size(5, 428);
-            this.edge1.TabIndex = 2;
-            this.edge1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.edge_MouseDown);
-            this.edge1.MouseLeave += new System.EventHandler(this.leaveEdge);
-            this.edge1.MouseHover += new System.EventHandler(this.onEdge);
-            this.edge1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.edge1_MouseMove);
-            this.edge1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.edge_MouseUp);
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(790, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(10, 428);
-            this.panel1.TabIndex = 3;
-            // 
             // edge2
             // 
             this.edge2.BackColor = System.Drawing.Color.Transparent;
@@ -404,24 +394,34 @@
             this.panel4.Size = new System.Drawing.Size(10, 428);
             this.panel4.TabIndex = 3;
             // 
+            // edge1
+            // 
+            this.edge1.BackColor = System.Drawing.Color.Transparent;
+            this.edge1.Controls.Add(this.panel1);
+            this.edge1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.edge1.Location = new System.Drawing.Point(0, 0);
+            this.edge1.Margin = new System.Windows.Forms.Padding(0);
+            this.edge1.Name = "edge1";
+            this.edge1.Size = new System.Drawing.Size(5, 428);
+            this.edge1.TabIndex = 2;
+            this.edge1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.edge_MouseDown);
+            this.edge1.MouseLeave += new System.EventHandler(this.leaveEdge);
+            this.edge1.MouseHover += new System.EventHandler(this.onEdge);
+            this.edge1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.edge1_MouseMove);
+            this.edge1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.edge_MouseUp);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(790, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(10, 428);
+            this.panel1.TabIndex = 3;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // drawing_Form1
-            // 
-            this.drawing_Form1.BackColor = System.Drawing.SystemColors.Control;
-            this.drawing_Form1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.drawing_Form1.Location = new System.Drawing.Point(5, 24);
-            this.drawing_Form1.Margin = new System.Windows.Forms.Padding(0);
-            this.drawing_Form1.Name = "drawing_Form1";
-            this.drawing_Form1.Size = new System.Drawing.Size(0, 0);
-            this.drawing_Form1.TabIndex = 7;
-            this.drawing_Form1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.draw_MouseDown);
-            this.drawing_Form1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDrawing);
-            this.drawing_Form1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.draw_MouseUp);
             // 
             // DrawForm
             // 
@@ -447,8 +447,8 @@
             this.edge3.ResumeLayout(false);
             this.TopMenu.ResumeLayout(false);
             this.TopMenu.PerformLayout();
-            this.edge1.ResumeLayout(false);
             this.edge2.ResumeLayout(false);
+            this.edge1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -22,9 +22,9 @@ namespace NeuroTrainer.Classes
         {
             foreach(Figures.Element element in elements) element.draw();
         }
-        public void drawAll(bool isLast)
+        public void reDrawAll()
         {
-            for(int step = 0; step < elements.Count-1; step++) elements[step].draw();
+            for(int step = elements.Count-1; step >= 0; step--) elements[step].draw();
         }
         public Page(Drawing_Form form)
         {
@@ -77,7 +77,13 @@ namespace NeuroTrainer.Classes
             {
                 integrated.colors.Add(element.Color.ToArgb());
                 integrated.types.Add(element.GetType().Name);
-                integrated.values.Add(element.List);
+                List<int> values = new List<int>();
+                foreach(Point point in element.List)
+                {
+                    values.Add(point.X);
+                    values.Add(point.Y);
+                }
+                integrated.values.Add(values);
             }
             return integrated;
         }

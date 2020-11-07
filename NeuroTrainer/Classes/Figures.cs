@@ -23,27 +23,24 @@ namespace NeuroTrainer.Classes
             {
                 if (parent == null) throw new PageIsNullException();
                 this.parent = parent;
-                parent.addElement(this);
                 this.color = color;
-                graphics = parent.form.CreateGraphics();
             }
-            protected void newList() => values = new List<int>() { 0, 0, 0, 0 };
+            protected virtual void newList(int x, int y) => points = new List<Point>() { new Point(x, y), new Point()};
             protected void dispose()
             {
                 graphics.Clear(parent.form.BackColor);
                 graphics = parent.form.CreateGraphics();
-                parent.drawAll(true);
+                parent.reDrawAll();
             }
             public virtual void setFirstPoint(int x, int y)
             {
-                newList();
-                values[0] = x;
-                values[1] = y;
+                graphics = parent.form.CreateGraphics();
+                parent.addElement(this);
+                newList(x, y);
             }
             public virtual void draw(int x1, int y1)
             {
-                values[2] = x1;
-                values[3] = y1;
+                points[1] = new Point(x1, y1);
                 draw();
             }
             public virtual void draw()
@@ -52,9 +49,9 @@ namespace NeuroTrainer.Classes
             public virtual void ifMouseDown()
             {
             }
-            protected List<int> values;
+            protected List<Point> points;
             protected Color color;
-            public List<int> List { get { return values; } }
+            public List<Point> List { get { return points; } }
             public Color Color { get { return color; } }
         }
         public class Circle : Element
@@ -63,14 +60,14 @@ namespace NeuroTrainer.Classes
             public Circle(Page parent, Color color) : base(parent, color) { }
             public override void draw(int x1, int y1)
             {
-                dispose();
                 base.draw(x1, y1);
+                dispose();
             }
             public override void draw()
             {
                 base.draw();
                 Pen pen = new Pen(color);
-                graphics.DrawEllipse(pen, values[0], values[1], values[3], values[3]);
+                graphics.DrawEllipse(pen, points[0].X, points[0].Y, points[1].X, points[1].Y);
             }
         }
         public class DirectLine : Element
@@ -79,36 +76,35 @@ namespace NeuroTrainer.Classes
             public DirectLine(Page parent, Color color) : base(parent, color) { }
             public override void draw(int x1, int y1)
             {
-                dispose();
                 base.draw(x1, y1);
+                dispose();
             }
             public override void draw()
             {
                 base.draw();
                 Pen pen = new Pen(color);
-                graphics.DrawLine(pen, values[0], values[1], values[2], values[3]);
+                graphics.DrawLine(pen, points[0].X, points[0].Y, points[1].X, points[1].Y);
             }
         }
-        public class Line : Element  //Будет создавать много элементов DirectLine
+        public class Line : Element
         {
             public Line(Page parent, Color color, int x, int y) : base(parent, color, x, y) { }
             public Line(Page parent, Color color) : base(parent, color) { }
+            protected override void newList(int x, int y) => points = new List<Point>() { new Point(x, y) };
             public override void draw(int x, int y)
             {
-                values.Add(x);
-                values.Add(y);
+                points.Add(new Point(x, y));
                 draw();
             }
             public override void setFirstPoint(int x, int y)
             {
-                values = new List<int>() { x, y };
-                dispose();
+                base.setFirstPoint(x, y);
             }
             public override void draw()
             {
                 base.draw();
                 Pen pen = new Pen(color);
-                for (int step = 0; step < values.Count - 2; step += 2) graphics.DrawLine(pen, values[step], values[step + 1], values[step + 2], values[step + 3]);
+                for (int step = 0; step < points.Count-1; step++) graphics.DrawLine(pen, points[step].X, points[step].Y, points[step+1].X, points[step+1].Y);
             }
 
         }
@@ -118,14 +114,14 @@ namespace NeuroTrainer.Classes
             public Rectangle(Page parent, Color color) : base(parent, color) { }
             public override void draw(int x1, int y1)
             {
-                dispose();
                 base.draw(x1, y1);
+                dispose();
             }
             public override void draw()
             {
                 base.draw();
                 Pen pen = new Pen(color);
-                graphics.DrawRectangle(pen, values[0], values[1], values[2], values[3]);
+                graphics.DrawRectangle(pen, points[0].X, points[0].Y, points[1].X, points[1].Y);
             }
         }
         public class Ellipse : Element
@@ -134,14 +130,14 @@ namespace NeuroTrainer.Classes
             public Ellipse(Page parent, Color color) : base(parent, color) { }
             public override void draw(int x1, int y1)
             {
-                dispose();
                 base.draw(x1, y1);
+                dispose();
             }
             public override void draw()
             {
                 base.draw();
                 Pen pen = new Pen(color);
-                graphics.DrawEllipse(pen, values[0], values[1], values[2], values[3]);
+                graphics.DrawEllipse(pen, points[0].X, points[0].Y, points[1].X, points[1].Y);
             }
         }
     }
